@@ -124,6 +124,23 @@ def hourofday(timestamp):
     return timestamp.hour
 
 
+# Shift the Spanish demand time series data by moving it two hours back
+
+def shift_ts(df_shift):
+    """
+    :param df_shift: pandas dataframe with the spanish hourly demand data
+    :return: pandas dataframe with demand data shifted by two hours
+    """
+    new_23 = df_shift.at[0, 'red_electrica']
+    new_24 = df_shift.at[1, 'red_electrica']
+
+    df_shift['red_electrica'] = df_shift['red_electrica'].shift(-2)
+
+    df_shift.at[22, 'red_electrica'] = new_23
+    df_shift.at[23, 'red_electrica'] = new_24
+
+    return df_shift
+
 # Function to calculate the hourly values
 
 def create_df_spanish(df_name4):
@@ -144,6 +161,7 @@ def create_df_spanish(df_name4):
 
     df_name5.index.name = 'hour'
     df_name5.reset_index(inplace=True)
+    df_name5 = shift_ts(df_name5)
 
     return df_name5
 
@@ -303,9 +321,3 @@ for season_now in seasons:
             title = "Electricity Demand on a Typical Winter Sunday"
             image_file_name = 'winter_sunday.html'
             plot_demand(winter_sunday, title, image_file_name)
-
-
-
-
-
-
