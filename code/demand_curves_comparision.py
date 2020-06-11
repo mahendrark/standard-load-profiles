@@ -5,7 +5,7 @@
 import pandas as pd
 from dateutil.parser import parse
 import plotly.graph_objects as go
-
+import pdfkit
 
 # Read in the data for Germany and Spain into Pandas dataframes
 def read_data(file_name):
@@ -141,6 +141,7 @@ def shift_ts(df_shift):
 
     return df_shift
 
+
 # Function to calculate the hourly values
 
 def create_df_spanish(df_name4):
@@ -261,6 +262,15 @@ def plot_demand(df_season_name, title_of_graph, fig_name):
 
     fig.update_layout(title=dict(text=title_of_graph, x=0.5, xref='paper', font=dict(family="Arial",
                                                                                      size=24, color='#090380')),
+                      width=1500,
+                      height=1000,
+                      margin=dict(
+                          l=50,
+                          r=50,
+                          b=100,
+                          t=100,
+                          pad=4
+                      ),
                       legend=dict(bordercolor='#0c085c', borderwidth=1, y=0.75),
                       xaxis=dict(type='category', showticklabels=True, showgrid=True, ticks='inside', showline=True,
                                  linecolor='#000000', gridcolor='#968f8f', gridwidth=0.01,
@@ -321,3 +331,4 @@ for season_now in seasons:
             title = "Electricity Demand on a Typical Winter Sunday"
             image_file_name = 'winter_sunday.html'
             plot_demand(winter_sunday, title, image_file_name)
+
