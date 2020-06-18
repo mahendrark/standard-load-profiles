@@ -1,11 +1,11 @@
 # Libraries needed are Plotly and Pandas
 # Plotly go can be installed using this command: pip install plotly==4.8.1
 # Pandas can be installed with: pip install pandas
+# Just testing some ideas
 
 import pandas as pd
 from dateutil.parser import parse
 import plotly.graph_objects as go
-import pdfkit
 
 # Read in the data for Germany and Spain into Pandas dataframes
 def read_data(file_name):
